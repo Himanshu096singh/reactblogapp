@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import BlogDate from './BlogDate';
 import {Card,Button} from 'react-bootstrap';
-
-const BlogComponent = (props) => {
+import {Link} from 'react-router-dom';
+const BlogItemComponent = (props) => {
 
     // let [newTitle, setNewTitle]= useState();
  
@@ -19,17 +19,19 @@ const BlogComponent = (props) => {
         <div>
             
             <Card style={{ width:"20rem",padding:"10px",margin:"10px"}}>
-                <Card.Img src="https://picsum.photos/150/100"/>
+                <Card.Img src={`http://localhost:8000/${props.image}`}/>
                 <Card.Body>
                     <Card.Title>
-                        {props.title }
+                        {props.title }  
                     </Card.Title>
                     <Card.Text>
-                    { props.description }
+                    { props.description.substring(0,200).replace(/(<([^>]+)>)/ig, '') }...<b><Link to={`/blog/${props.slug}`} >Read More</Link></b>
+
+
                     </Card.Text>
-                    {/* <Button variant="success">
-                        <BlogDate date = {props.date}></BlogDate>
-                    </Button> */}
+                    <Button variant="success">
+                        <BlogDate date = {new Date(props.date)}></BlogDate>
+                    </Button>
                     {/* <div>
                         <input type="text" value={newTitle} onChange={ChangeHandler} />
                         <Button variant="warning" onClick={ClickHandler}>
@@ -45,4 +47,4 @@ const BlogComponent = (props) => {
     );
 }
 
-export default BlogComponent;
+export default BlogItemComponent;

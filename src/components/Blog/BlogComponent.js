@@ -12,9 +12,13 @@ const BlogComponent = (props) => {
                         blogs => (
                             <BlogItemComponent 
                                 key = {blogs.id}
-                                title = {blogs.blogtitle}
-                                description = {blogs.blogdescription}
-                                date = {blogs.blogdate}
+                                id = {blogs.id}
+                                title = {blogs.title}
+                                description = {blogs.description}
+                                date = {blogs.created_at}
+                                slug = {blogs.slug}
+                                image = {blogs.image}
+                                
                             />
                        )
                     )

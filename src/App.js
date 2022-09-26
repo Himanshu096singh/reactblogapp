@@ -1,80 +1,38 @@
-import React,{useState} from 'react';
+import React from 'react';
 import './App.css';
 import BlogComponent from './components/Blog/BlogComponent';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import BlogForm from './components/Form/BlogForm';
-
 import {Container, Row} from 'react-bootstrap';
+import Navbar from './components/include/NavbarComponent.js'
+import Home from './components/pages/Home';
+import About from './components/pages/About';
+import Contact from './components/pages/Contact';
+import Blog from './components/pages/Blog';
+import PageNotFound from './components/pages/PageNotFound';
+import BlogSingle from './components/pages/BlogSingle';
+import {BrowserRouter, Routes, Route } from "react-router-dom";
 
-let bloglist = [
-    {
-        id:1,
-        title:"this is one"
-    },
-    {
-        id:2,
-        title:"this is one"
-    }
-];
+// const getData = () =>
+// {
+//     axios.get('https://newsapi.org/v2/everything?q=apple&from=2022-08-07&to=2022-08-07&sortBy=popularity&apiKey=568cabcb76ed42cfb72bf7d8ffc7d703')
+//         .then((response) => {
+//             console.log(response.data.articles);
+//         // setBlogs(response.data);
+//           });
+// }
 
-const App = () => {
- 
-    const [blogs,setBlogs] = useState(bloglist);
-
-    fetch('http://localhost:8000/api/blogs')
-    .then(response => {
-            return  response.json();
-        }
-    ).then(apidata => {
-            console.log(apidata);
-        // setBlogs(apidata);
-        }
-    );
-
-    const addBlogData = (blogFormData) => {
-
-        
-
-        // console.log(blogFormData);
-        // const idAdd = {id:Math.floor(Math.random()*99) ,...blogFormData}
-
-        // // console.log(idAdd)
-
-        // const newBlogData= [
-        //     idAdd, ...blogs
-        // ];
-
-        // setBlogs(newBlogData);
-        // console.log(newBlogData);
-        
-        // const newBlogData = [`
-        // id: ${Math.random(2)}`, blogFormData, ...blogs ]
-
-    //    let newBlog = {
-    //        newBlogData, ...blogs
-    //     }
-    // let newBlog = [blogFormData, ...blogs]
-    //     console.log(newBlog)
-    //     setBlogs(newBlog);
-
-    // console.log("asdf");
-        // console.log(newBlogData);
-    }
-   
-
-
-    return (
+    const App = () => {
+        return (
             <div>
-                <Container>
-                    <h1 style={{textAlign:"center", padding:"15px"}}>
-                        My Articles
-                    </h1>
-                    <BlogForm getBlogData = {addBlogData}/>
-                    <Row>
-                        <BlogComponent data={blogs} />
-                    </Row>
-                </Container>    
-
+                <Navbar />
+                <Routes>
+                        <Route path="/home" element={<Home/>}/>
+                        <Route path="/about" element={<About/>}/>
+                        <Route path="/blog" element={<Blog/>} />
+                        <Route path="/blog/:slug" element={<BlogSingle/>}/>
+                        <Route path="/contact" element={<Contact/>}/>
+                </Routes>
             </div>
          );
 }

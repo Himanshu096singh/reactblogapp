@@ -5,9 +5,9 @@ import './BlogForm.css';
 
 const BlogForm = (props) =>{
 
-    const [title, setTitle] = useState("ww");
-    const [dateentered, setDateEntered] = useState("ww"); 
-    const [description, setDescription] = useState("ww");
+    const [title, setTitle] = useState("");
+    const [dateentered, setDateEntered] = useState(""); 
+    const [description, setDescription] = useState("");
     
     const titleHandler = (event) => {
         setTitle(event.target.value);
@@ -23,12 +23,12 @@ const BlogForm = (props) =>{
         event.preventDefault();
 
         const handlerValue = {
-            blogtitle:  title,
-            blogdate:   dateentered,
-            blogdescription:    description,
+            title:  title,
+            created_at:   dateentered,
+            description:    description,
         };
 
-        // console.log(handlerValue);
+        console.log(handlerValue);
 
         props.getBlogData(handlerValue);
 
